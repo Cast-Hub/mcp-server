@@ -1,6 +1,7 @@
 {
   "name": "@cast-hub/mcp",
   "version": "0.1.0",
+  "mcpName": "io.github.cast-hub/mcp",
   "description": "MCP server for CastHub digital signage. Manage TV fleets, presentations, schedules, and emergency alerts from any MCP client.",
   "keywords": [
     "mcp",
