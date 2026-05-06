@@ -13,7 +13,7 @@
   "homepage": "https://cast-hub.com/mcp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cast-Hub/mcp-server"
+    "url": "git+https://github.com/Cast-Hub/mcp-server.git"
   },
   "bugs": {
     "url": "https://github.com/Cast-Hub/mcp-server/issues"
@@ -24,7 +24,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "casthub-mcp": "./dist/index.js"
+    "casthub-mcp": "dist/index.js"
   },
   "files": [
     "dist",
