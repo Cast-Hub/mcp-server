@@ -1,0 +1,38 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Cast-Hub/mcp",
+  "title": "CastHub",
+  "description": "Control CastHub digital signage. Manage TVs, presentations, schedules, and emergency alerts.",
+  "websiteUrl": "https://cast-hub.com/mcp",
+  "repository": {
+    "url": "https://github.com/Cast-Hub/mcp-server",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@cast-hub/mcp",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "CASTHUB_API_KEY",
+          "description": "API key generated at https://dashboard.cast-hub.com",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "CASTHUB_MCP_URL",
+          "description": "Override the hosted endpoint URL. Defaults to https://api.cast-hub.com/mcp.",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
