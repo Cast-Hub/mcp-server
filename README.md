@@ -27,7 +27,7 @@ No installation required. Add the CastHub MCP server to your Claude Desktop, Cur
 {
   "mcpServers": {
     "casthub": {
-      "url": "https://mcp.cast-hub.com",
+      "url": "https://api.cast-hub.com/mcp",
       "auth": {
         "type": "bearer",
         "token": "YOUR_CASTHUB_API_KEY"

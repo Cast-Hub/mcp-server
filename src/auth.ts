@@ -23,7 +23,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): CastHubConfig 
     process.exit(1);
   }
 
-  const mcpUrl = (env.CASTHUB_MCP_URL?.trim() || "https://mcp.cast-hub.com").replace(
+  const mcpUrl = (env.CASTHUB_MCP_URL?.trim() || "https://api.cast-hub.com/mcp").replace(
     /\/+$/,
     "",
   );

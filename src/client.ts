@@ -2,7 +2,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import type { CastHubConfig } from "./auth.js";
 
-// NOTE: DNS for mcp.cast-hub.com must be live before publishing v0.1.0.
+// NOTE: api.cast-hub.com/mcp must be live before publishing v0.1.0.
 // The hosted endpoint is the source of truth for tool definitions and execution.
 // This module is a transport shim only.
 

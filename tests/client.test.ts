@@ -5,7 +5,7 @@ import { loadConfig } from "../src/auth.ts";
 test("loadConfig returns config when CASTHUB_API_KEY is set", () => {
   const cfg = loadConfig({ CASTHUB_API_KEY: "test-key" });
   assert.equal(cfg.apiKey, "test-key");
-  assert.equal(cfg.mcpUrl, "https://mcp.cast-hub.com");
+  assert.equal(cfg.mcpUrl, "https://api.cast-hub.com/mcp");
 });
 
 test("loadConfig honors CASTHUB_MCP_URL override", () => {
