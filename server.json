@@ -28,7 +28,7 @@
         },
         {
           "name": "CASTHUB_MCP_URL",
-          "description": "Override the hosted endpoint URL. Defaults to https://api.cast-hub.com/mcp.",
+          "description": "Override the hosted endpoint URL. Defaults to https://webapi.cast-hub.com/mcp.",
           "isRequired": false,
           "format": "string"
         }

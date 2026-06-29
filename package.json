@@ -2,14 +2,19 @@
   "name": "@cast-hub/mcp",
   "version": "0.1.1",
   "mcpName": "io.github.Cast-Hub/mcp",
-  "description": "MCP server for CastHub digital signage. Manage TV fleets, presentations, schedules, and emergency alerts from any MCP client.",
+  "description": "Model Context Protocol server for digital signage. Manage TV fleets, presentations, schedules, and emergency alerts from Claude, ChatGPT, Microsoft Copilot, Google Gemini, Cursor, or any MCP-compatible client.",
   "keywords": [
     "mcp",
     "model-context-protocol",
     "digital-signage",
     "casthub",
     "claude",
-    "ai-agents"
+    "ai-agents",
+    "oauth",
+    "chatgpt",
+    "copilot",
+    "gemini",
+    "cursor"
   ],
   "homepage": "https://cast-hub.com/mcp",
   "repository": {
