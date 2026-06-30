@@ -1,6 +1,6 @@
 # CastHub MCP Server
 
-> Model Context Protocol server for digital signage. Manage TV fleets, presentations, schedules, and emergency alerts from Claude, Cursor, ChatGPT, or any MCP client.
+> Model Context Protocol server for digital signage. Manage TV fleets, presentations, schedules, and emergency alerts from Claude, ChatGPT, Microsoft Copilot, Google Gemini, Cursor, or any MCP-compatible client.
 
 [![npm version](https://img.shields.io/npm/v/@cast-hub/mcp.svg)](https://www.npmjs.com/package/@cast-hub/mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -11,43 +11,34 @@
 
 ## What this is
 
-CastHub MCP Server lets AI assistants directly control digital signage networks. Instead of clicking through a dashboard, you tell Claude to update the lobby TV, push an emergency alert to all stores, or schedule next week's promotional content. The server exposes 30+ tools covering devices, presentations, schedules, alerts, and groups across the CastHub platform.
+CastHub MCP Server lets AI assistants directly control digital signage networks. Instead of clicking through a dashboard, you tell your assistant to update the lobby TV, push an emergency alert to all stores, or schedule next week's promotional content. The server exposes approximately 45 tools across devices, presentations, schedules, alerts, groups, and device commands, so the whole CastHub platform is reachable in natural language.
 
 ## Why this exists
 
-Digital signage management is repetitive, multi-step work that maps cleanly to natural language. Several signage platforms (Fugo, Revel Digital, Screenly) have shipped MCP support over the last year. CastHub MCP differentiates on hosted endpoint architecture (no local install required for the basic path), a governance layer with preview-confirm-rollback for safe agent use, and native Amazon Signage Stick integration.
+Digital signage management is repetitive, multi-step work that maps cleanly to natural language. Several signage platforms (Fugo, Revel Digital, Screenly) have shipped MCP support over the last year. CastHub differentiates in four ways. You connect to a hosted endpoint that uses OAuth 2.0 with PKCE and dynamic client registration, so you never paste an API key or run a local process for the standard path. Every tool ships with annotations (ReadOnly, Destructive, Idempotent) that drive proper confirmation prompts in each AI client before a disruptive action runs. Pricing is flat-rate with unlimited screens on the Pro plan rather than per-screen. And CastHub is an approved CMS partner on the Amazon Signage Stick.
 
-## Two ways to connect
+## Connect from any AI assistant
 
-### Option A: Hosted endpoint (recommended)
+The CastHub MCP server is hosted at `https://webapi.cast-hub.com/mcp`. Authentication uses OAuth 2.0 with PKCE and dynamic client registration, so you sign in once through your AI assistant and approve access. No API keys, no local install required for the standard path.
 
-No installation required. Add the CastHub MCP server to your Claude Desktop, Cursor, or other MCP client config:
+Connection instructions for each client are in the CastHub docs:
 
-```json
-{
-  "mcpServers": {
-    "casthub": {
-      "url": "https://api.cast-hub.com/mcp",
-      "auth": {
-        "type": "bearer",
-        "token": "YOUR_CASTHUB_API_KEY"
-      }
-    }
-  }
-}
-```
+- Connect Claude (web, Desktop, mobile)
+- Connect ChatGPT
+- Connect Microsoft Copilot (Copilot Studio and GitHub Copilot in VS Code)
+- Connect Google Gemini (Gemini Enterprise and Gemini CLI)
+- Connect Cursor
+- CastHub CLI for shell automation and CI
 
-Generate your API key at [dashboard.cast-hub.com](https://dashboard.cast-hub.com/).
+Full setup is at https://cast-hub.com/mcp.
 
-### Option B: Install the SDK locally
+### Local install for stdio-only clients
 
-For MCP clients that require a local stdio process:
+For MCP clients that can only launch a local stdio process, install the SDK and point it at the hosted endpoint:
 
 ```bash
 npm install -g @cast-hub/mcp
 ```
-
-Then configure your client:
 
 ```json
 {
@@ -62,9 +53,13 @@ Then configure your client:
 }
 ```
 
-The SDK forwards MCP protocol calls to the CastHub hosted endpoint. All tool execution happens server-side; the SDK is a transport shim.
+The SDK is a transport shim. All tool execution happens server-side at `https://webapi.cast-hub.com/mcp`.
 
-## Available Tools (30+)
+## Available tools
+
+The server exposes approximately 45 tools across Devices, Device groups, Presentations, Schedules, Alerts, Device commands, and Account and dashboard. The authoritative tool list comes from calling `tools/list` against the live MCP server, which is the source of truth and may have grown since this README was last updated.
+
+The tables below reflect the tool set as of the last README update. The live server is authoritative; tool inventory may have grown since.
 
 ### Devices
 
@@ -131,7 +126,7 @@ The SDK forwards MCP protocol calls to the CastHub hosted endpoint. All tool exe
 | stop_all_alerts | Stop alerts on all groups |
 | stop_group_alert | Stop an alert on a specific group |
 
-### Account and utility
+### Account and dashboard
 
 | Tool name | Description |
 |---|---|
@@ -146,7 +141,8 @@ The SDK forwards MCP protocol calls to the CastHub hosted endpoint. All tool exe
 |---|---|---|---|---|
 | MCP server available | Yes | Yes | Yes | Yes |
 | Hosted endpoint (no local CLI install) | Yes | No (CLI-based) | Yes | Yes |
-| Governance layer (preview, confirm, rollback) | Yes | No | No | No |
+| OAuth 2.0 with PKCE and dynamic client registration | Yes | Unknown | Unknown | Unknown |
+| Per-tool annotations for confirmation prompts (ReadOnly, Destructive, Idempotent) | Yes | Unknown | Unknown | Unknown |
 | Amazon Signage Stick native support | Yes | No | Partial | No |
 | Flat-rate pricing | Yes | Per-screen | Per-screen | Per-screen |
 | Open-source player option | Roadmap | Yes (Pi via Anthias) | No | No |
@@ -171,13 +167,20 @@ Prompt: `"Show me all devices that have not checked in for over 24 hours"`
 
 Tools called: `get_devices` (filtered client-side)
 
+### Roll out content from Microsoft Copilot or Gemini
+
+Prompt: `"Schedule the new menu board presentation across the downtown cafe group for tomorrow morning"`
+
+Tools called: `get_presentations`, `assign_presentation`, `assign_schedule`
+
 More walkthroughs in [`examples/`](./examples).
 
 ## Documentation
 
-- [CastHub MCP overview](https://cast-hub.com/mcp)
+- [CastHub MCP docs](https://cast-hub.com/mcp)
 - [CastHub Dashboard](https://dashboard.cast-hub.com)
 - [CastHub pricing](https://cast-hub.com/digital-signage-pricing/)
+- [Signup](https://dashboard.cast-hub.com/register-user)
 
 ## License
 
@@ -185,4 +188,4 @@ MIT. See [LICENSE](LICENSE).
 
 ## Contributing
 
-Issues and pull requests welcome at [github.com/Cast-Hub/mcp-server/issues](https://github.com/Cast-Hub/mcp-server/issues). For commercial questions or partnership inquiries, contact [info@cast-hub.com](mailto:info@cast-hub.com).
+Issues and pull requests welcome at [github.com/Cast-Hub/mcp-server/issues](https://github.com/Cast-Hub/mcp-server/issues). For commercial questions or partnership inquiries, contact [info@cast-hub.com](mailto:info@cast-hub.com). For customer support questions, contact [support@cast-hub.com](mailto:support@cast-hub.com).
