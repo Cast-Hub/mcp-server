@@ -9,6 +9,12 @@
     "source": "github"
   },
   "version": "0.1.1",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://webapi.cast-hub.com/mcp"
+    }
+  ],
   "packages": [
     {
       "registryType": "npm",
